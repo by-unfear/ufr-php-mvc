@@ -1,0 +1,5 @@
+[02-Mar-2020 16:00:26 UTC] PHP Fatal error:  Uncaught Error: Cannot access parent:: when current class scope has no parent in D:\Servidor\_git\php-mvc\framework\App.class.php:5
+Stack trace:
+#0 D:\Servidor\_git\php-mvc\index.php(10): App->__construct()
+#1 {main}
+  thrown in D:\Servidor\_git\php-mvc\framework\App.class.php on line 5
