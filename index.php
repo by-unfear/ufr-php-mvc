@@ -9,6 +9,8 @@ if (class_exists('App')) {
 
 	$app = new App();
 
+	$app->run();
+
 } else {
     echo 'Não foi possivel criar o sistema';
 }

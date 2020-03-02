@@ -1,8 +1,12 @@
 <?php
-class App{
+class App extends Router{
 	
     function __construct(){
-		echo 'Hello World!';
+		parent::__construct();
+	}
+
+	function run(){
+		$this->route();
 	}
 
 }
