@@ -38,12 +38,18 @@ class Router extends Request{
 
 	private function addRoute($method, $uri, $handler, $option= []){
 
-		if(preg_match_all('([-:\/_{}a-zA-Z]+(?!=\[[-:\/_{}a-zA-Z]+\]))', $uri, $tmp)){
-			foreach ($tmp[0] as $v) {
-				$this->routes[$method][]= [$uri, $handler, $option];
+		if(preg_match_all('([-:\/_{}a-zA-Z]+(?!=\[[-:\/_{}a-zA-Z]+\]))', $uri, $parts)){
+			$part = null;
+			foreach ($parts[0] as $v) {
+				$part .= $v;
+				
+				echo $v.'<br>';
+				$this->routes[$method][]= new Route($part, $handler, $option);
 			}
 		}else{
-			$this->routes[$method][]= [$uri, $handler, $option];
+			throw new Exception("[Router] Finalmente acessou aqui");
+
+			//$this->routes[$method][]= new Route($part, $handler, $option);
 		}
 	}
 	

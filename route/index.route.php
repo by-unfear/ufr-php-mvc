@@ -6,7 +6,7 @@ $route->get('/', function(){
 $route->get('/outro', function(){
 	echo 'Hello Wolrld! #2';
 });
-$route->get('/outro', function(){
+$route->get('/outro[/teste]', function(){
 	echo 'Hello Wolrld! #2';
 });
 $route->get('/b', function(){
