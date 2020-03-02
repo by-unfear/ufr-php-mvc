@@ -1,12 +1,12 @@
 <?php
-class App extends Router{
+class App extends Bootstrap{
 	
     function __construct(){
 		parent::__construct();
 	}
 
 	function run(){
-		$this->route();
+		$this->init();
 	}
 
 }
