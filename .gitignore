@@ -1,5 +1,11 @@
+#geral
 **/.*
 **/_*
+
+#arquivos
 !.gitignore
 !.htaccess
 *.log
+
+#pastas
+upload

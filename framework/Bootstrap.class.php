@@ -18,6 +18,7 @@ class Bootstrap extends Request{
 		if(file_exists(str_replace('/', DS, ltrim(Config::get('route'), '/').'/'.$file.'.route.php'))){
 			$route = new Router($file);
 			require_once(str_replace('/', DS, ltrim(Config::get('route'), '/').'/'.$file.'.route.php'));
+			$route->route();
 			return true;
 		}
 		return false;
