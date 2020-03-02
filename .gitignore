@@ -2,4 +2,4 @@
 **/_*
 !.gitignore
 !.htaccess
-# *.log
+*.log

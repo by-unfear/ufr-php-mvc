@@ -6,7 +6,7 @@ class App extends Bootstrap{
 	}
 
 	function run(){
-		$this->init();
+		$this->boot();
 	}
 
 }

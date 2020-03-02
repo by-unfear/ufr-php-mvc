@@ -15,7 +15,7 @@ class Router {
 
 	}
 	
-	function route(){
+	function get(){
 		echo 'Hello World!';
 	}
 }
