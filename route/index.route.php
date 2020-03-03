@@ -3,13 +3,13 @@ Arquivo Index<br><br>
 $route->get('/', function(){
 	echo 'Hello Wolrld! #1';
 });
-$route->get('/outro', function(){
+$route->get('/pro', function(){
 	echo 'Hello Wolrld! #2';
 });
-$route->get('/outro[/teste]', function(){
+$route->get('/outro[/{teste:int}]', function(){
 	echo 'Hello Wolrld! #2';
 });
-$route->get('/b', function(){
+$route->get('/{a}', function(){
 	echo 'Hello Wolrld! #3';
 }, ['opt'=>false]);
 $route->get('/b', 'pagina@index');

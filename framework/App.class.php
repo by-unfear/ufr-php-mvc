@@ -5,6 +5,7 @@ class App extends Bootstrap{
 		parent::__construct();
 	}
 
+	//Roda a aplicacao
 	function run(){
 		$this->boot();
 	}
