@@ -8,7 +8,6 @@ $route->get('/', function(){
 
 });
 
-
 $route->get('/a', function(){
 	echo 'Hello Wolrld! #2'.'<br>';
 });
@@ -29,4 +28,4 @@ $route->get('/c/{teste}', 'pagina@index');
 
 $route->get('/c/c', 'pagina@teste');
 
-$route->get('/c/d', 'pagina@outro');
+$route->get('/p/{metodo}', 'pagina@{metodo}');

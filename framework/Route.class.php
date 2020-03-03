@@ -29,7 +29,20 @@ class Route {
         if (preg_match($this->regex($this->uri), $uri, $args)) {
 			
 			//Salvar valor dos argumentos
-            $this->args = array_intersect_key($args, array_flip(array_filter(array_keys($args), 'is_string')));
+			$this->args = array_intersect_key($args, array_flip(array_filter(array_keys($args), 'is_string')));
+			
+			//Caso o argumento interaja com a string do controle ex: $route->get(pagina/{metodo}, 'control/pagina@{metodo}');
+			if(is_string($this->handler) && preg_match_all('({\w+})', $this->handler, $tmp)){
+				foreach ($tmp[0] as $v) {
+					$c= str_replace(['{','}'], '', $v);
+					if(isset($this->args[$c])){
+						$this->handler= str_replace($v, $this->args[$c], $this->handler);
+						unset($this->args[$c]);
+					}
+				}
+			}
+
+
             return true;
         }
         return false;
