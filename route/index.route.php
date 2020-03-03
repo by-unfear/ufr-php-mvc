@@ -4,6 +4,8 @@ Arquivo Index<br><br>
 
 $route->get('/', function(){
 	echo 'Hello Wolrld! #1'.'<br>';
+	echo var_export(get_defined_vars(), true);
+
 });
 
 

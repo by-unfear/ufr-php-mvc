@@ -11,24 +11,17 @@ class Bootstrap extends Request{
 	 */
 	public function boot(){
 		$file = explode('/', ltrim($this->getUri(), '/'))[0];
-		if($this->route($file)){
-		}else if($this->route('index')){
-		}else{
-			echo 'Sem rota index.route<br>';
-		}
-	}
-
-	/**
-	 * Verifica se o arquivo de router existe e se ele existir ele inicia o roteamento no arquivo
-	 */
-	private function route($file){
 		if(file_exists(str_replace('/', DS, ltrim(Config::get('route'), '/').'/'.$file.'.route.php'))){
 			$route = new Router($file);
 			require_once(str_replace('/', DS, ltrim(Config::get('route'), '/').'/'.$file.'.route.php'));
 			$route->route();
-			return true;
+		}else if(file_exists(str_replace('/', DS, ltrim(Config::get('route'), '/').'/index.route.php'))){
+			$route = new Router();
+			require_once(str_replace('/', DS, ltrim(Config::get('route'), '/').'/index.route.php'));
+			$route->route();
+		}else{
+
 		}
-		return false;
 	}
 
 }

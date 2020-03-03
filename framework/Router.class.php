@@ -7,12 +7,16 @@ class Router extends Request {
         'PUT' => [],
         'DELETE' => [],
         'ANY' => [],
-    ];
+];
+	private $raiz = '';
 
     protected $routes = [];
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct($raiz = '') {
+		parent::__construct();
+		if($raiz != null){
+			$this->raiz = '/'.$raiz;
+		}
     }
 
     /**
@@ -67,6 +71,8 @@ class Router extends Request {
      * Adicionar nova rota
      */
     private function addRoute($method, $uri, $handler, $option = []) {
+
+		$uri = $this->raiz.$uri;
 
 		//Separa em partes rotas dinamicas ex: /pagina[/acao][/id] => /pagina, /pagina/acao, /pagina/acao/id
         if (preg_match_all('([-:\/_{}a-zA-Z\d]+(?!=\[[-:\/_{}a-zA-Z\d]+\]))', $uri, $parts)) {
