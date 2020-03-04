@@ -9,4 +9,14 @@ function loadFramework($name) {
     }
 }
 
+function loadFunction(){
+	$path = APPDIR.DS.'framework'.DS.'function';
+	foreach (scandir($path) as $v) {
+		if(preg_match('/^[a-zA-Z0-9]+\.(function.php)$/', $v)){
+			require_once($path.DS.$v);
+		}
+	}
+}
+loadFunction();
+
 spl_autoload_register("loadFramework");

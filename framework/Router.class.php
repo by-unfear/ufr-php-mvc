@@ -121,7 +121,14 @@ class Router extends Request {
                 require_once $file;
 
 				//Criar objeto
-                $controller = new Control();
+				$controller= str_replace(['-','_'],'',$controller).'Control';
+				$method= str_replace(['-','_'],'',$method);
+				
+				
+				//Criar objeto
+				$controller = array_reverse(explode('/', $controller))[0];
+				$controller= new $controller();
+
 
 				//Carregar metodo ou metodo index
                 if (method_exists($controller, $method)) {
