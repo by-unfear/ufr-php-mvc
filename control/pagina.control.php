@@ -1,5 +1,5 @@
 <?php
-class PaginaControl{
+class PaginaControl extends Pagina{
 
 	public function index($teste = []){
 		echo var_export(get_defined_vars(), true);

@@ -7,6 +7,10 @@ function loadFramework($name) {
     if (file_exists($file)) {
         require_once $file;
     }
+    $file = APPDIR . DS . 'midware' . DS . $name . '.class.php';
+    if (file_exists($file)) {
+        require_once $file;
+    }
 }
 
 function loadFunction(){
