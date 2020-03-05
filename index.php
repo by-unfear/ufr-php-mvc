@@ -8,7 +8,6 @@ if (file_exists('framework' . DIRECTORY_SEPARATOR . 'load.inc.php')) {
 if (class_exists('App')) {
 
 	$app = new App();
-
 	$app->run();
 
 } else {

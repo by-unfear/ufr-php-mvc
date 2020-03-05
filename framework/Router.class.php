@@ -35,7 +35,7 @@ class Router extends Request {
     }
 
     public function delete($uri, $handler = null, $option = []) {
-        $this->addRoute('DELETE', $uri, $handler, $args);
+        $this->addRoute('DELETE', $uri, $handler, $option);
     }
 
     public function any($uri, $handler = null, $option = []) {
@@ -96,11 +96,13 @@ class Router extends Request {
 
         //Dados da rota
         $handler = $route->handler();
-        $args = $route->args();
-
+		$args = $route->args();
+		
+		$args = is_array($args)?$args:[];
+		
         //Funcao
         if (is_callable($handler)) {
-            return call_user_func_array($handler, [$args]);
+            return call_user_func_array($handler, $args);
         }
 
         //Endereco do objeto do controle
@@ -132,9 +134,9 @@ class Router extends Request {
 
 				//Carregar metodo ou metodo index
                 if (method_exists($controller, $method)) {
-                    return call_user_func_array([$controller, $method], [$args]);
+                    return call_user_func_array([$controller, $method], $args);
                 } else if (method_exists($controller, 'index')) {
-                    return call_user_func_array([$controller, 'index'], [$args]);
+                    return call_user_func_array([$controller, 'index'], $args);
                 }
             }
         }
