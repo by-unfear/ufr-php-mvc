@@ -118,12 +118,12 @@ class Router extends Request {
             }
 
             //Verifica se arquivo existe
-            $file = str_replace('/', DS, ltrim(Config::get('control'), '/') . DS . $controller . '.control.php');
+            $file = str_replace('/', DS, ltrim(Config::get('control'), '/') . DS . $controller . '.controller.php');
             if (file_exists($file)) {
                 require_once $file;
 
 				//Criar objeto
-				$controller= str_replace(['-','_'],'',$controller).'Control';
+				$controller= str_replace(['-','_'],'',$controller).'Controller';
 				$method= str_replace(['-','_'],'',$method);
 				
 				

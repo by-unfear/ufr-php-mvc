@@ -50,7 +50,12 @@ class Request{
 			$response.= $data;
 		fclose($file);
 		return $response;
-    }
+	}
+	
+	public function getJson(){
+		$json = json_decode($this->getContent(), true);
+		return (json_last_error() == JSON_ERROR_NONE) ? $json : [];
+	}
 
     public function getUri():string{
 		$self = $this->getServer('PHP_SELF')?str_replace('index.php/', '', $this->getServer('PHP_SELF')):'';
