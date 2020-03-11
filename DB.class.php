@@ -4,7 +4,7 @@ class DB {
     private $db = null;
 
     public function __construct() {
-        $this->db = new mysqli(Config::get('host'), Config::get('login'), Config::get('senha'), Config::get('banco'));
+        $this->db = new mysqli(Config::$host, Config::$user, Config::$pass, Config::$db);
         if (mysqli_connect_errno()) {
             die('[db] Não foi possivel se conectar ao banco de dados');
         }

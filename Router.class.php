@@ -7,16 +7,16 @@ class Router extends Request {
         'PUT' => [],
         'DELETE' => [],
         'ANY' => [],
-];
-	private $raiz = '';
+    ];
+    private $raiz = '';
 
     protected $routes = [];
 
     public function __construct($raiz = '') {
-		parent::__construct();
-		if($raiz != null){
-			$this->raiz = '/'.$raiz;
-		}
+        parent::__construct();
+        if ($raiz != null) {
+            $this->raiz = '/' . $raiz;
+        }
     }
 
     /**
@@ -47,13 +47,13 @@ class Router extends Request {
      */
     public function route() {
         $method = $this->getMethod();
-		$uri = rtrim($this->getUri(), '/') . '/';
-		
+        $uri = rtrim($this->getUri(), '/') . '/';
+
         //Verifica rotas conforme o metodo
         if (isset($this->routes[$method])) {
-			foreach ($this->routes[$method] as $route) {
-				if ($route->match($uri)) {
-                    $this->getController($route);
+            foreach ($this->routes[$method] as $route) {
+                if ($route->match($uri)) {
+                    return $this->getController($route);
                 }
             }
         }
@@ -61,10 +61,12 @@ class Router extends Request {
         if (isset($this->routes['ANY'])) {
             foreach ($this->routes['ANY'] as $route) {
                 if ($route->match($uri)) {
-                    $this->getController($route);
+                    return $this->getController($route);
                 }
             }
         }
+        return $this->getController(new Route(null, function () {echo '404';}, []));
+
     }
 
     /**
@@ -72,9 +74,9 @@ class Router extends Request {
      */
     private function addRoute($method, $uri, $handler, $option = []) {
 
-		$uri = $this->raiz.$uri;
+        $uri = $this->raiz . $uri;
 
-		//Separa em partes rotas dinamicas ex: /pagina[/acao][/id] => /pagina, /pagina/acao, /pagina/acao/id
+        //Separa em partes rotas dinamicas ex: /pagina[/acao][/id] => /pagina, /pagina/acao, /pagina/acao/id
         if (preg_match_all('([-:\/_{}a-zA-Z\d]+(?!=\[[-:\/_{}a-zA-Z\d]+\]))', $uri, $parts)) {
             $part = null;
             foreach ($parts[0] as $v) {
@@ -96,10 +98,10 @@ class Router extends Request {
 
         //Dados da rota
         $handler = $route->handler();
-		$args = $route->args();
-		
-		$args = is_array($args)?$args:[];
-		
+        $args = $route->args();
+
+        $args = is_array($args) ? $args : [];
+
         //Funcao
         if (is_callable($handler)) {
             return call_user_func_array($handler, $args);
@@ -118,26 +120,32 @@ class Router extends Request {
             }
 
             //Verifica se arquivo existe
-            $file = str_replace('/', DS, ltrim(Config::get('control'), '/') . DS . $controller . '.controller.php');
+            $file = str_replace('/', DS, Config::$control . DS . $controller . '.controller.php');
             if (file_exists($file)) {
                 require_once $file;
 
-				//Criar objeto
-				$controller= str_replace(['-','_'],'',$controller).'Controller';
-				$method= str_replace(['-','_'],'',$method);
-				
-				
-				//Criar objeto
-				$controller = array_reverse(explode('/', $controller))[0];
-				$controller= new $controller();
+                //Criar objeto
+                $controller = str_replace(['-', '_'], '', $controller) . 'Controller';
+                $method = str_replace(['-', '_'], '', $method);
 
+                //Criar objeto
+                $controller = array_reverse(explode('/', $controller))[0];
+                if(class_exists($controller)){
 
-				//Carregar metodo ou metodo index
-                if (method_exists($controller, $method)) {
-                    return call_user_func_array([$controller, $method], $args);
-                } else if (method_exists($controller, 'index')) {
-                    return call_user_func_array([$controller, 'index'], $args);
+                    $controller = new $controller();
+                    //Carregar metodo ou metodo index
+                    if (method_exists($controller, $method)) {
+                        return call_user_func_array([$controller, $method], $args);
+                    } else if (method_exists($controller, 'index')) {
+                        return call_user_func_array([$controller, 'index'], $args);
+                    }else{
+                        Debug::get("Não foi possivel carregar o metodo [{$method}]");
+                    }
+                }else{
+                    Debug::get("Não foi possivel carregar o controle [{$controller}]");
                 }
+            }else{
+                Debug::get("Não foi possivel encontrar o controle [\\$file]");
             }
         }
     }
