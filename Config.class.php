@@ -15,7 +15,7 @@ class Config{
 	static protected $host = 'localhost';
 	static protected $login = 'root';
 	static protected $senha = 'teste';
-	static protected $banco = 'raquel';
+	static protected $banco = 'banco';
 
 	
 	static function set($param, $value){

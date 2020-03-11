@@ -4,12 +4,5 @@
 
 #arquivos
 !.gitignore
-!.htaccess
 *.log
-
-#pastas
-upload
-lib
-js
-mvc
-layout
+*_log
