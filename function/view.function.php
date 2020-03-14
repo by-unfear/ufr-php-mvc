@@ -13,7 +13,7 @@ if (!function_exists('view')) {
                 unset($v);
                 require str_replace('/', DS, Config::$view . DS . $path . '.view.php');
             } else {
-                Debug::get('View não encontrada [\\'.str_replace('/', DS, Config::$view . DS . $path . '.view.php').']');
+                Debug::get('View não encontrada ['.Config::$view . DS . $path . '.view.php]');
             }
         }
     }

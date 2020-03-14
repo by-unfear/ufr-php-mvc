@@ -24,7 +24,7 @@ class Bootstrap extends Request {
             require_once str_replace('/', DS, Config::$route . '/error.route.php');
             $route->route();
         } else {
-            Debug::get('Não foi possivel encontrar a primeira rota [/'.str_replace('/', DS, Config::$route).']');
+            Debug::get('Não foi possivel encontrar a primeira rota ['.Config::$route.$file.']');
         }
     }
 

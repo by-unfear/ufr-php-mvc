@@ -2,7 +2,7 @@
 if (!function_exists('render')) {
     function render($path = null, $args = []) {
         if ($path !== null) {
-            if (file_exists(APPDIR.str_replace('/', DS, Config::$layout . DS . $path . '.php'))) {
+            if (file_exists(APPDIR.DS.str_replace('/', DS, Config::$layout . DS . $path . '.php'))) {
                 if (is_array($args) && count($args) > 0) {
                     foreach ($args as $c => $v) {
                         ${$c} = $v;
@@ -11,9 +11,9 @@ if (!function_exists('render')) {
                 unset($args);
                 unset($c);
                 unset($v);
-                require APPDIR.str_replace('/', DS, Config::$layout . DS . $path . '.php');
+                require APPDIR.DS.str_replace('/', DS, Config::$layout . DS . $path . '.php');
             } else {
-                Debug::get('Render não encontrada ['.str_replace('/', DS, Config::$layout . DS . $path . '.php').']');
+                Debug::get('Render não encontrada [/'.Config::$layout . DS . $path . '.php]');
             }
         }
     }

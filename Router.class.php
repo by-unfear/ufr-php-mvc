@@ -120,7 +120,7 @@ class Router extends Request {
             }
 
             //Verifica se arquivo existe
-            $file = str_replace('/', DS, Config::$control . DS . $controller . '.controller.php');
+            $file = str_replace('/', DS, Config::$controller . DS . $controller . '.controller.php');
             if (file_exists($file)) {
                 require_once $file;
 
@@ -145,7 +145,7 @@ class Router extends Request {
                     Debug::get("Não foi possivel carregar o controle [{$controller}]");
                 }
             }else{
-                Debug::get("Não foi possivel encontrar o controle [\\$file]");
+                Debug::get("Não foi possivel encontrar o controle [{$file}]");
             }
         }
     }

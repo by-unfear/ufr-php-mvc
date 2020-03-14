@@ -6,8 +6,8 @@ function loadFramework($name) {
     $file = APPDIR . DS . 'framework' . DS . $name . '.class.php';
     if (file_exists($file)) {
         require_once $file;
-	}
-	// TODO: (roberson) repensar isso aqui
+    }
+    // TODO: (roberson) repensar isso aqui
     // $file = APPDIR . DS . 'mvc' . DS . 'global' . DS . $name . '.class.php';
     // if (file_exists($file)) {
     //     require_once $file;
@@ -23,5 +23,20 @@ function loadFunction() {
     }
 }
 loadFunction();
+
+
+
+function sistemaLogErros($code = null, $msg = null, $file = null, $line = null, $trace = null) {
+    Debug::log($code, $msg, $file, $line, $trace);
+}
+
+//function sistemaTratamentoEssecoes(Exception $e, $trace= false){ // php < 7
+function sistemaTratamentoEssecoes(Throwable $e, $trace = false) { // php 7
+    Debug::Exception($e);
+   exit();
+}
+
+set_error_handler('sistemaLogErros');
+set_exception_handler('sistemaTratamentoEssecoes');
 
 spl_autoload_register("loadFramework");
