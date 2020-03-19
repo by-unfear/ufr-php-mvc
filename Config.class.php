@@ -27,7 +27,7 @@ class Config {
     }
 
     public static function setPath($array = []) {
-        if (isset($array['base'])) {
+        if (isset($array['base']) && preg_match('/\/+[A-z.\/]+\//', $array['base'])) {
             self::$base = '/'.trim($array['base'], '/').'/';
         }
         if (isset($array['layout'])) {
