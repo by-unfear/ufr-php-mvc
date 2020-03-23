@@ -8,7 +8,6 @@ function loadFramework($name) {
         require_once $file;
     }
     $file = APPDIR . DS . str_replace('/', DS, Config::$global . DS . $name . '.class.php');
-    echo $file . '<br>';
     if (file_exists($file)) {
         require_once $file;
     }
