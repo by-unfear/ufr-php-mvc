@@ -7,11 +7,11 @@ function loadFramework($name) {
     if (file_exists($file)) {
         require_once $file;
     }
-    // TODO: (roberson) repensar isso aqui
-    // $file = APPDIR . DS . 'mvc' . DS . 'global' . DS . $name . '.class.php';
-    // if (file_exists($file)) {
-    //     require_once $file;
-    // }
+    $file = APPDIR . DS . str_replace('/', DS, Config::$global . DS . $name . '.class.php');
+    echo $file . '<br>';
+    if (file_exists($file)) {
+        require_once $file;
+    }
 }
 
 function loadFunction() {
@@ -24,8 +24,6 @@ function loadFunction() {
 }
 loadFunction();
 
-
-
 function sistemaLogErros($code = null, $msg = null, $file = null, $line = null, $trace = null) {
     Debug::log($code, $msg, $file, $line, $trace);
 }
@@ -33,7 +31,7 @@ function sistemaLogErros($code = null, $msg = null, $file = null, $line = null, 
 //function sistemaTratamentoEssecoes(Exception $e, $trace= false){ // php < 7
 function sistemaTratamentoEssecoes(Throwable $e, $trace = false) { // php 7
     Debug::Exception($e);
-   exit();
+    exit();
 }
 
 set_error_handler('sistemaLogErros');
