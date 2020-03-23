@@ -9,7 +9,7 @@ if (!function_exists('model')) {
                 $model = str_replace(['-', '_'], '', $model) . 'Model';
                 return new $model($args);
             } else {
-                Debug::get('View não encontrada ['. Config::$model . DS . $path . '.model.php]');
+                Debug::set('View não encontrada ['. Config::$model . DS . $path . '.model.php]');
             }
         }
     }

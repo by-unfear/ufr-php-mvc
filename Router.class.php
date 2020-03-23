@@ -45,7 +45,7 @@ class Router extends Request {
     /**
      * Executar as rotas
      */
-    public function route() {
+    public function run() {
         $method = $this->getMethod();
         $uri = rtrim($this->getUri(), '/') . '/';
 
@@ -139,13 +139,13 @@ class Router extends Request {
                     } else if (method_exists($controller, 'index')) {
                         return call_user_func_array([$controller, 'index'], $args);
                     }else{
-                        Debug::get("Não foi possivel carregar o metodo [{$method}]");
+                        Debug::set("Não foi possivel carregar o metodo [{$method}]");
                     }
                 }else{
-                    Debug::get("Não foi possivel carregar o controle [{$controller}]");
+                    Debug::set("Não foi possivel carregar o controle [{$controller}]");
                 }
             }else{
-                Debug::get("Não foi possivel encontrar o controle [{$file}]");
+                Debug::set("Não foi possivel encontrar o controle [{$file}]");
             }
         }
     }

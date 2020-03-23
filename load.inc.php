@@ -4,12 +4,14 @@ define('DS', DIRECTORY_SEPARATOR);
 
 function loadFramework($name) {
     $file = APPDIR . DS . 'framework' . DS . $name . '.class.php';
+    // echo '<br>Try: '.$file;
     if (file_exists($file)) {
         require_once $file;
-    }
-    $file = APPDIR . DS . str_replace('/', DS, Config::$global . DS . $name . '.class.php');
-    if (file_exists($file)) {
-        require_once $file;
+    }else{
+        $file = APPDIR . DS . str_replace('/', DS, Config::$global . DS . $name . '.php');
+        if (file_exists($file)) {
+            require_once $file;
+        }
     }
 }
 
@@ -24,7 +26,7 @@ function loadFunction() {
 loadFunction();
 
 function sistemaLogErros($code = null, $msg = null, $file = null, $line = null, $trace = null) {
-    Debug::log($code, $msg, $file, $line, $trace);
+    Debug::error($code, $msg, $file, $line, $trace);
 }
 
 //function sistemaTratamentoEssecoes(Exception $e, $trace= false){ // php < 7

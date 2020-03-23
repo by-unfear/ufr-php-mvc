@@ -14,17 +14,17 @@ class Bootstrap extends Request {
         if (file_exists(str_replace('/', DS, Config::$route . '/' . $file . '.route.php'))) {
             $route = new Router($file);
             require_once str_replace('/', DS, Config::$route . '/' . $file . '.route.php');
-            $route->route();
+            $route->run();
         } else if (file_exists(str_replace('/', DS, Config::$route . '/index.route.php'))) {
             $route = new Router();
             require_once str_replace('/', DS, Config::$route . '/index.route.php');
-            $route->route();
+            $route->run();
         } else if (file_exists(str_replace('/', DS, Config::$route . '/error.route.php'))) {
             $route = new Router();
             require_once str_replace('/', DS, Config::$route . '/error.route.php');
-            $route->route();
+            $route->run();
         } else {
-            Debug::get('Não foi possivel encontrar a primeira rota ['.Config::$route.$file.']');
+            Debug::set('Não foi possivel encontrar a primeira rota ['.Config::$route.$file.']');
         }
     }
 

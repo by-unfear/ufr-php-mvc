@@ -13,7 +13,7 @@ if (!function_exists('render')) {
                 unset($v);
                 require APPDIR.DS.str_replace('/', DS, Config::$layout . DS . $path . '.php');
             } else {
-                Debug::get('Render não encontrada [/'.Config::$layout . DS . $path . '.php]');
+                Debug::set('Render não encontrada [/'.Config::$layout . DS . $path . '.php]');
             }
         }
     }
