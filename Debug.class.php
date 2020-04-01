@@ -46,10 +46,19 @@ class Debug {
         $msg = $e->getMessage();
         $array = $e->getTrace();
 
-        // $file= $e->getFile();
-        // $line= $e->getLine();
-        $file = $array[0]['file'];
-        $line = $array[0]['line'];
+        var_export($array, true);
+        if (is_array($array)) {
+            if (count($array)>0){
+                $file = $array[0]['file'];
+                $line = $array[0]['line'];
+            }else{
+                $file = 'unknow';
+                $line = 'unknow';
+            }
+        } else {
+            $file = $e->getFile();
+            $line = $e->getLine();
+        }
 
         $trace = $e->getTraceAsString();
         //$trace = str_replace(DB_PASS, '********', $trace);

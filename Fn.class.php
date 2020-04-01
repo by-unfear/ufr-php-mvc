@@ -1,5 +1,5 @@
 <?php
-class Fn {
+class F {
     public static function __callStatic($f, $args) {
         if (function_exists($f) !== true) {
             if (!file_exists(APPDIR . DS . 'framework' . DS . 'function' . DS . $f . '.function.php')) {
