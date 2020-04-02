@@ -27,8 +27,8 @@ class DB {
 
     public function select($tabela, $array = [], $where = null, $outro = null, $fetch = 'assoc') {
         $retorno = array();
-        $where = ($where !== null) ? " WHERE {$where} " : '';
-        $outro = ($outro !== null) ? " {$outro} " : '';
+        $where = ($where != null) ? " WHERE {$where} " : '';
+        $outro = ($outro != null) ? " {$outro} " : '';
         $campo = null;
         if (is_array($array) && count($array) > 0) {
             foreach ($array as $c => $v) {
@@ -93,16 +93,15 @@ class DB {
     }
 
     public function delete($tabela, $where, $limit = null) {
-        $where = ($where !== null) ? " WHERE {$where} " : '';
         $limit = (is_numeric($limit) && $limit != null) ? " LIMIT {$limit} " : '';
         if (!$res = $this->db->query("DELETE FROM {$tabela} WHERE {$where} {$limit}")) {
-            throw new Exception("[delete] Erro: [{$this->db->error}]");
+            throw new Exception("[delete] Erro: [{$this->db->error}] SQL: \"DELETE FROM {$tabela} WHERE {$where} {$limit}\" ");
         }
         return $res;
     }
 
     public function getId($tabela, $campoID, $where = null) {
-        $where = ($where !== null) ? " WHERE {$where} " : '';
+        $where = ($where != null) ? " WHERE {$where} " : '';
         $res = $this->db->query("SELECT {$campoID} FROM {$tabela} {$where} ORDER BY {$campoID} DESC LIMIT 1");
         if ($val = $res->fetch_assoc()) {
             return ++$val[$campoID];
@@ -112,7 +111,7 @@ class DB {
     }
 
     public function getTotal($tabela, $where = null) {
-        $where = ($where !== null) ? " WHERE {$where} " : '';
+        $where = ($where != null) ? " WHERE {$where} " : '';
         $res = $this->db->query("SELECT * FROM {$tabela} {$where}");
         return $res->num_rows;
     }
