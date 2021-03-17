@@ -60,7 +60,7 @@ class Request {
     }
 
     public function getUri(): string {
-        $self = $this->getServer('PHP_SELF') ? str_replace('index.php/', '', $this->getServer('PHP_SELF')) : '';
+        $self = $this->getServer('PHP_SELF'); //? str_replace('index.php/', '', $this->getServer('PHP_SELF')) : '';
         $uri = $this->getServer('REQUEST_URI') ? explode('?', $this->getServer('REQUEST_URI'))[0] : '';
         if ($self !== $uri) {
             $peaces = explode('/', $self);
